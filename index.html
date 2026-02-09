@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conductor - Every Model. In Harmony.</title>
+    <meta name="description" content="Conductor is an open-source model runner management platform. Route, balance, and orchestrate AI model endpoints with automatic failover, health checking, and a React dashboard.">
+    <meta name="keywords" content="model runner, AI, LLM, proxy, load balancing, Ollama, OpenAI, virtual model runner, docker, open source, orchestration">
+    <meta property="og:title" content="Conductor - Every Model. In Harmony.">
+    <meta property="og:description" content="Route, balance, and orchestrate AI model endpoints with an open-source management platform.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/x-icon" href="assets/icon-dark.ico">
+    <link rel="icon" type="image/png" href="assets/icon-dark.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="assets/icon-light.png" alt="Conductor" class="logo-dark-mode">
+                <img src="assets/icon-dark.png" alt="Conductor" class="logo-light-mode">
+                <span class="nav-logo-text">Conductor</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#problem">Why</a>
+                <a href="#score">How It Works</a>
+                <a href="#repertoire">Capabilities</a>
+                <a href="#setlist">Features</a>
+                <a href="#getting-started">Get Started</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <a href="https://github.com/jchristn/Conductor" class="btn btn-gold btn-sm" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         SECTION 1: THE OVERTURE (Hero)
+         ============================================================ -->
+    <section class="hero" id="hero">
+        <!-- Animated SVG routing background -->
+        <div class="hero-bg">
+            <svg class="hero-routing" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <!-- Source nodes (left) -->
+                <circle class="source-node" cx="100" cy="180" r="6" />
+                <circle class="source-node" cx="100" cy="300" r="6" />
+                <circle class="source-node" cx="100" cy="420" r="6" />
+
+                <!-- Conductor central node -->
+                <circle class="conductor-node conductor-glow" cx="600" cy="300" r="20" />
+                <text class="conductor-label" x="600" y="305" text-anchor="middle" font-size="14">&#9835;</text>
+
+                <!-- Endpoint nodes (right) -->
+                <circle class="endpoint-node" cx="1050" cy="140" r="8" />
+                <text class="endpoint-label" x="1050" y="170" text-anchor="middle">Ollama</text>
+                <circle class="endpoint-node" cx="1100" cy="300" r="8" />
+                <text class="endpoint-label" x="1100" y="330" text-anchor="middle">OpenAI</text>
+                <circle class="endpoint-node" cx="1050" cy="460" r="8" />
+                <text class="endpoint-label" x="1050" y="490" text-anchor="middle">Custom</text>
+
+                <!-- Routing lines: sources to conductor -->
+                <path class="route-line route-in" d="M 106 180 Q 350 180 594 296" />
+                <path class="route-line route-in" d="M 106 300 L 580 300" />
+                <path class="route-line route-in" d="M 106 420 Q 350 420 594 304" />
+
+                <!-- Routing lines: conductor to endpoints -->
+                <path class="route-line route-out route-out-1" d="M 620 292 Q 840 200 1042 140" />
+                <path class="route-line route-out route-out-2" d="M 620 300 Q 840 300 1092 300" />
+                <path class="route-line route-out route-out-3" d="M 620 308 Q 840 400 1042 460" />
+
+                <!-- Animated particles -->
+                <circle class="particle particle-1" r="3" />
+                <circle class="particle particle-2" r="3" />
+                <circle class="particle particle-3" r="3" />
+                <circle class="particle particle-4" r="3" />
+                <circle class="particle particle-5" r="3" />
+                <circle class="particle particle-6" r="3" />
+            </svg>
+        </div>
+
+        <div class="hero-content">
+            <img src="assets/icon-light.png" alt="Conductor" class="hero-logo logo-dark-mode">
+            <img src="assets/icon-dark.png" alt="Conductor" class="hero-logo logo-light-mode">
+            <h1 class="hero-title">Every model.<br><span class="gold-text">In harmony.</span></h1>
+            <p class="hero-subtitle">Conductor is an open-source orchestration layer that routes, balances, and manages your AI model endpoints &mdash; so your applications never miss a beat.</p>
+            <div class="hero-ctas">
+                <a href="#getting-started" class="btn btn-gold btn-lg">Get Started</a>
+                <a href="https://github.com/jchristn/Conductor" class="btn btn-outline-gold btn-lg" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    View on GitHub
+                </a>
+            </div>
+            <div class="trust-badges">
+                <span class="badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    MIT License
+                </span>
+                <span class="badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                    Docker Ready
+                </span>
+                <span class="badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    Multi-Tenant
+                </span>
+                <span class="badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    Auto-Failover
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: THE PROBLEM (Before/After)
+         ============================================================ -->
+    <section class="problem" id="problem">
+        <div class="container container-wide">
+            <div class="section-header">
+                <h2 class="section-title">Why Conductor?</h2>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card problem-without">
+                    <div class="problem-card-header">
+                        <span class="problem-indicator problem-indicator-red"></span>
+                        <h3>Without Conductor</h3>
+                    </div>
+                    <div class="problem-dots-bg chaos-dots"></div>
+                    <ul class="problem-list">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Hardcoded endpoints scattered across services
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            One provider goes down, your app goes down
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            No visibility into request routing or failures
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Switching providers means rewriting integration code
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Every team manages their own model configs
+                        </li>
+                    </ul>
+                </div>
+                <div class="problem-card problem-with">
+                    <div class="problem-card-header">
+                        <span class="problem-indicator problem-indicator-gold"></span>
+                        <h3>With Conductor</h3>
+                    </div>
+                    <div class="problem-dots-bg harmony-dots"></div>
+                    <ul class="problem-list">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            One unified endpoint for all model providers
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Automatic failover routes around unhealthy endpoints
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Full request history, health monitoring, and a dashboard
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Swap providers by changing config, not code
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Centralized configuration pinning across tenants
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: THE SCORE (How It Works)
+         ============================================================ -->
+    <section class="score" id="score">
+        <div class="container-full">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Conductor sits between your application and your model endpoints, orchestrating every request.</p>
+            </div>
+
+            <div class="score-flow" id="scoreFlow">
+                <!-- App node -->
+                <div class="score-node score-node-app">
+                    <div class="score-node-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <span class="score-node-label">Your App</span>
+                </div>
+
+                <!-- Arrow -->
+                <div class="score-arrow">
+                    <svg viewBox="0 0 100 2" preserveAspectRatio="none"><line class="score-arrow-line" x1="0" y1="1" x2="100" y2="1"/></svg>
+                </div>
+
+                <!-- Conductor node -->
+                <div class="score-node score-node-conductor">
+                    <div class="score-node-icon conductor-icon">
+                        <img src="assets/icon-light.png" alt="Conductor" class="logo-dark-mode" width="36" height="36">
+                        <img src="assets/icon-dark.png" alt="Conductor" class="logo-light-mode" width="36" height="36">
+                    </div>
+                    <span class="score-node-label">Conductor</span>
+                </div>
+
+                <!-- Branching arrows -->
+                <div class="score-branch">
+                    <svg class="score-branch-svg" viewBox="0 0 120 160" preserveAspectRatio="none">
+                        <path class="score-branch-line" d="M 0 80 Q 60 80 120 20" />
+                        <path class="score-branch-line" d="M 0 80 L 120 80" />
+                        <path class="score-branch-line" d="M 0 80 Q 60 80 120 140" />
+                    </svg>
+                </div>
+
+                <!-- Endpoint nodes -->
+                <div class="score-endpoints">
+                    <div class="score-node score-node-endpoint">
+                        <div class="score-node-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+                        </div>
+                        <span class="score-node-label">Ollama</span>
+                    </div>
+                    <div class="score-node score-node-endpoint">
+                        <div class="score-node-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                        </div>
+                        <span class="score-node-label">OpenAI</span>
+                    </div>
+                    <div class="score-node score-node-endpoint">
+                        <div class="score-node-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg>
+                        </div>
+                        <span class="score-node-label">Any Compatible</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Annotation cards -->
+            <div class="container">
+                <div class="score-annotations">
+                    <div class="score-card">
+                        <h4>Load Balancing</h4>
+                        <p>Round-robin, random, or first-available routing with weighted distribution. Traffic spreads evenly or by priority.</p>
+                    </div>
+                    <div class="score-card">
+                        <h4>Health Checking</h4>
+                        <p>Background monitoring with configurable thresholds. Unhealthy endpoints drop from rotation, restored automatically on recovery.</p>
+                    </div>
+                    <div class="score-card">
+                        <h4>Session Affinity</h4>
+                        <p>Pin clients to specific endpoints by IP, API key, or custom header. Conversations stay on the same model runner.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: THE REPERTOIRE (Capabilities by Persona)
+         ============================================================ -->
+    <section class="repertoire" id="repertoire">
+        <div class="container container-reading">
+            <div class="section-header">
+                <h2 class="section-title">Built for Your Role</h2>
+            </div>
+
+            <!-- Block A: Platform Teams (text left, visual right) -->
+            <div class="repertoire-block">
+                <div class="repertoire-text">
+                    <span class="repertoire-label">For Platform Teams</span>
+                    <h3>Centralized model management</h3>
+                    <p>Define virtual model runners that abstract your backend endpoints. Assign tenants, pin configurations, and enforce consistent settings across your organization &mdash; all from one control plane.</p>
+                    <ul class="repertoire-features">
+                        <li>Virtual model runners with multi-endpoint routing</li>
+                        <li>Full multi-tenancy with RBAC (global admin, tenant admin, user)</li>
+                        <li>Configuration pinning for temperature, top_p, and more</li>
+                        <li>4 database backends: SQLite, PostgreSQL, MySQL, SQL Server</li>
+                    </ul>
+                </div>
+                <div class="repertoire-visual">
+                    <div class="tenant-visual">
+                        <div class="tenant-box">
+                            <span class="tenant-label">Tenant A</span>
+                            <div class="tenant-config">
+                                <span>temp: 0.7</span>
+                                <span>model: gpt-4o</span>
+                            </div>
+                        </div>
+                        <div class="tenant-box">
+                            <span class="tenant-label">Tenant B</span>
+                            <div class="tenant-config">
+                                <span>temp: 0.2</span>
+                                <span>model: llama3.2</span>
+                            </div>
+                        </div>
+                        <div class="tenant-box">
+                            <span class="tenant-label">Tenant C</span>
+                            <div class="tenant-config">
+                                <span>temp: 0.9</span>
+                                <span>model: mistral</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block B: AI Engineers (visual left, text right) -->
+            <div class="repertoire-block repertoire-block-reverse">
+                <div class="repertoire-text">
+                    <span class="repertoire-label">For AI Engineers</span>
+                    <h3>You already know the API</h3>
+                    <p>Conductor speaks OpenAI and Ollama natively. Point your existing SDK at Conductor and gain routing, balancing, and failover &mdash; without changing your application code.</p>
+                </div>
+                <div class="repertoire-visual">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <button class="copy-btn" aria-label="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span>Copy</span></button>
+                        </div>
+<pre><code><span class="t-keyword">from</span> openai <span class="t-keyword">import</span> OpenAI
+
+client = OpenAI(
+<span class="t-highlight">    base_url=<span class="t-string">"http://localhost:9000/vmr/my-runner/v1"</span>,</span>
+    api_key=<span class="t-string">"default"</span>
+)
+
+response = client.chat.completions.create(
+    model=<span class="t-string">"llama3.2"</span>,
+    messages=[{<span class="t-string">"role"</span>: <span class="t-string">"user"</span>, <span class="t-string">"content"</span>: <span class="t-string">"Hello!"</span>}]
+)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block C: Ops (full-width) -->
+            <div class="repertoire-block repertoire-block-full">
+                <div class="repertoire-text">
+                    <span class="repertoire-label">For Ops</span>
+                    <h3>Observe, control, react</h3>
+                    <p>A built-in React dashboard gives you real-time visibility into request history, endpoint health, and routing decisions. Set rate limits per endpoint, monitor failures, and watch traffic reroute automatically when an endpoint goes down.</p>
+                </div>
+                <div class="repertoire-visual repertoire-visual-health">
+                    <div class="health-indicators">
+                        <div class="health-item">
+                            <span class="health-dot health-green"></span>
+                            <span class="health-name">ollama-1</span>
+                            <span class="health-status">Healthy</span>
+                        </div>
+                        <div class="health-item">
+                            <span class="health-dot health-green"></span>
+                            <span class="health-name">ollama-2</span>
+                            <span class="health-status">Healthy</span>
+                        </div>
+                        <div class="health-item">
+                            <span class="health-dot health-red" id="healthRedDot"></span>
+                            <span class="health-name">openai-1</span>
+                            <span class="health-status health-status-red" id="healthRedStatus">Rerouting...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: THE SETLIST (Feature Reference)
+         ============================================================ -->
+    <section class="setlist" id="setlist">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">At a Glance</h2>
+                <p class="section-subtitle">Everything Conductor brings to your stack.</p>
+            </div>
+            <div class="setlist-columns">
+                <div class="setlist-group">
+                    <h4 class="setlist-category">Routing</h4>
+                    <div class="setlist-pills">
+                        <span class="pill">OpenAI proxy</span>
+                        <span class="pill">Ollama proxy</span>
+                        <span class="pill">Streaming</span>
+                        <span class="pill">SSE</span>
+                        <span class="pill">Virtual model runners</span>
+                    </div>
+                </div>
+                <div class="setlist-group">
+                    <h4 class="setlist-category">Balancing</h4>
+                    <div class="setlist-pills">
+                        <span class="pill">Round-robin</span>
+                        <span class="pill">Random</span>
+                        <span class="pill">First-available</span>
+                        <span class="pill">Weighted</span>
+                        <span class="pill">Rate limiting</span>
+                    </div>
+                </div>
+                <div class="setlist-group">
+                    <h4 class="setlist-category">Resilience</h4>
+                    <div class="setlist-pills">
+                        <span class="pill">Health checks</span>
+                        <span class="pill">Auto-failover</span>
+                        <span class="pill">Session affinity (IP)</span>
+                        <span class="pill">Session affinity (Key)</span>
+                        <span class="pill">Session affinity (Header)</span>
+                    </div>
+                </div>
+                <div class="setlist-group">
+                    <h4 class="setlist-category">Management</h4>
+                    <div class="setlist-pills">
+                        <span class="pill">Multi-tenant</span>
+                        <span class="pill">RBAC</span>
+                        <span class="pill">Request history</span>
+                        <span class="pill">Config pinning</span>
+                        <span class="pill">Audit trail</span>
+                    </div>
+                </div>
+                <div class="setlist-group">
+                    <h4 class="setlist-category">Infrastructure</h4>
+                    <div class="setlist-pills">
+                        <span class="pill">Docker</span>
+                        <span class="pill">SQLite</span>
+                        <span class="pill">PostgreSQL</span>
+                        <span class="pill">MySQL</span>
+                        <span class="pill">SQL Server</span>
+                        <span class="pill">React dashboard</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: THE FIRST REHEARSAL (Getting Started)
+         ============================================================ -->
+    <section class="getting-started" id="getting-started">
+        <div class="container container-reading">
+            <div class="section-header">
+                <h2 class="section-title">The First Rehearsal</h2>
+                <p class="section-subtitle">Up and running in three steps with Docker Compose.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-line" id="timelineLine"></div>
+
+                <div class="timeline-step">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>Download the compose file</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Shell</span>
+                                <button class="copy-btn" aria-label="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span>Copy</span></button>
+                            </div>
+<pre><code>curl -o compose.yaml \
+  https://raw.githubusercontent.com/jchristn/Conductor/main/docker/compose.yaml</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>Start the containers</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Shell</span>
+                                <button class="copy-btn" aria-label="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span>Copy</span></button>
+                            </div>
+<pre><code>docker compose up -d</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>Verify it's running</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Shell</span>
+                                <button class="copy-btn" aria-label="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span>Copy</span></button>
+                            </div>
+<pre><code>curl http://localhost:9000/</code></pre>
+                        </div>
+                        <p class="timeline-note">Next: Open the Dashboard at <a href="http://localhost:9100" target="_blank" rel="noopener">localhost:9100</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible alternatives -->
+            <div class="collapsible-group">
+                <details class="collapsible">
+                    <summary>
+                        <span>Docker Run</span>
+                        <svg class="collapsible-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </summary>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Shell</span>
+                                <button class="copy-btn" aria-label="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span>Copy</span></button>
+                            </div>
+<pre><code><span class="t-comment"># Start Conductor server</span>
+docker run -d --name conductor \
+  -p 9000:8080 \
+  jchristn77/conductor:latest
+
+<span class="t-comment"># Start Conductor UI</span>
+docker run -d --name conductor-ui \
+  -p 9100:8080 \
+  jchristn77/conductorui:latest</code></pre>
+                        </div>
+                    </div>
+                </details>
+                <details class="collapsible">
+                    <summary>
+                        <span>From Source</span>
+                        <svg class="collapsible-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </summary>
+                    <div class="collapsible-content">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Shell</span>
+                                <button class="copy-btn" aria-label="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> <span>Copy</span></button>
+                            </div>
+<pre><code>git clone https://github.com/jchristn/Conductor.git
+cd Conductor/src/Conductor
+dotnet build
+dotnet run</code></pre>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="getting-started-links">
+                <a href="https://github.com/jchristn/Conductor" target="_blank" rel="noopener">GitHub Repository</a>
+                <span class="link-sep">&middot;</span>
+                <a href="https://hub.docker.com/r/jchristn77/conductor" target="_blank" rel="noopener">Docker Hub (Server)</a>
+                <span class="link-sep">&middot;</span>
+                <a href="https://hub.docker.com/r/jchristn77/conductorui" target="_blank" rel="noopener">Docker Hub (UI)</a>
+                <span class="link-sep">&middot;</span>
+                <span>MIT License</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: THE ENCORE (CTA + Footer)
+         ============================================================ -->
+    <section class="encore" id="encore">
+        <div class="container">
+            <h2 class="encore-title">Take the podium.</h2>
+            <div class="encore-ctas">
+                <a href="#getting-started" class="btn btn-gold btn-lg">Get Started</a>
+                <a href="https://github.com/jchristn/Conductor" class="btn btn-outline-gold btn-lg" target="_blank" rel="noopener">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Star on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <img src="assets/icon-light.png" alt="Conductor" class="footer-logo logo-dark-mode" width="24" height="24">
+                    <img src="assets/icon-dark.png" alt="Conductor" class="footer-logo logo-light-mode" width="24" height="24">
+                    <span>Conductor</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/jchristn/Conductor" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://hub.docker.com/r/jchristn77/conductor" target="_blank" rel="noopener">Docker Hub (Server)</a>
+                    <a href="https://hub.docker.com/r/jchristn77/conductorui" target="_blank" rel="noopener">Docker Hub (UI)</a>
+                    <span>MIT License</span>
+                </div>
+                <div class="footer-copy">&copy; 2025 Conductor. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
