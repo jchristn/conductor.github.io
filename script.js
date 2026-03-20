@@ -118,16 +118,17 @@
         var routeOutPaths = document.querySelectorAll('.route-out');
         var particles = document.querySelectorAll('.particle');
 
-        if (routeInPaths.length < 3 || routeOutPaths.length < 3 || particles.length < 6) return;
+        if (routeInPaths.length < 3 || routeOutPaths.length < 4 || particles.length < 7) return;
 
-        // Map particles to paths: 1-3 on in-paths, 4-6 on out-paths
+        // Map particles to paths: 1-3 on in-paths, 4-7 on out-paths
         var pathPairs = [
             { particle: particles[0], path: routeInPaths[0] },
             { particle: particles[1], path: routeInPaths[1] },
             { particle: particles[2], path: routeInPaths[2] },
             { particle: particles[3], path: routeOutPaths[0] },
             { particle: particles[4], path: routeOutPaths[1] },
-            { particle: particles[5], path: routeOutPaths[2] }
+            { particle: particles[5], path: routeOutPaths[2] },
+            { particle: particles[6], path: routeOutPaths[3] }
         ];
 
         pathPairs.forEach(function (pair) {
@@ -174,7 +175,7 @@
     function setupEndpointDimming() {
         var endpoints = document.querySelectorAll('.endpoint-node');
         var outPaths = document.querySelectorAll('.route-out');
-        if (endpoints.length < 3 || outPaths.length < 3) return;
+        if (endpoints.length < 4 || outPaths.length < 4) return;
 
         var currentDim = -1;
 
@@ -190,7 +191,7 @@
             // Pick a new one to dim
             var next;
             do {
-                next = Math.floor(Math.random() * 3);
+                next = Math.floor(Math.random() * 4);
             } while (next === currentDim);
             currentDim = next;
 

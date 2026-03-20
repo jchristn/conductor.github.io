@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conductor - Every Model. In Harmony.</title>
     <meta name="description" content="Conductor is an open-source model runner management platform. Route, balance, and orchestrate AI model endpoints with automatic failover, health checking, and a React dashboard.">
-    <meta name="keywords" content="model runner, AI, LLM, proxy, load balancing, Ollama, OpenAI, virtual model runner, docker, open source, orchestration">
+    <meta name="keywords" content="model runner, AI, LLM, proxy, load balancing, Ollama, OpenAI, vLLM, Gemini, virtual model runner, docker, open source, orchestration">
     <meta property="og:title" content="Conductor - Every Model. In Harmony.">
     <meta property="og:description" content="Route, balance, and orchestrate AI model endpoints with an open-source management platform.">
     <meta property="og:type" content="website">
@@ -63,12 +63,14 @@
                 <text class="conductor-label" x="600" y="305" text-anchor="middle" font-size="14">&#9835;</text>
 
                 <!-- Endpoint nodes (right) -->
-                <circle class="endpoint-node" cx="1050" cy="140" r="8" />
-                <text class="endpoint-label" x="1050" y="170" text-anchor="middle">Ollama</text>
-                <circle class="endpoint-node" cx="1100" cy="300" r="8" />
-                <text class="endpoint-label" x="1100" y="330" text-anchor="middle">OpenAI</text>
-                <circle class="endpoint-node" cx="1050" cy="460" r="8" />
-                <text class="endpoint-label" x="1050" y="490" text-anchor="middle">Custom</text>
+                <circle class="endpoint-node" cx="1050" cy="120" r="8" />
+                <text class="endpoint-label" x="1050" y="150" text-anchor="middle">OpenAI</text>
+                <circle class="endpoint-node" cx="1080" cy="230" r="8" />
+                <text class="endpoint-label" x="1080" y="260" text-anchor="middle">Ollama</text>
+                <circle class="endpoint-node" cx="1080" cy="370" r="8" />
+                <text class="endpoint-label" x="1080" y="400" text-anchor="middle">vLLM</text>
+                <circle class="endpoint-node" cx="1050" cy="480" r="8" />
+                <text class="endpoint-label" x="1050" y="510" text-anchor="middle">Gemini</text>
 
                 <!-- Routing lines: sources to conductor -->
                 <path class="route-line route-in" d="M 106 180 Q 350 180 594 296" />
@@ -76,9 +78,10 @@
                 <path class="route-line route-in" d="M 106 420 Q 350 420 594 304" />
 
                 <!-- Routing lines: conductor to endpoints -->
-                <path class="route-line route-out route-out-1" d="M 620 292 Q 840 200 1042 140" />
-                <path class="route-line route-out route-out-2" d="M 620 300 Q 840 300 1092 300" />
-                <path class="route-line route-out route-out-3" d="M 620 308 Q 840 400 1042 460" />
+                <path class="route-line route-out route-out-1" d="M 620 290 Q 840 180 1042 120" />
+                <path class="route-line route-out route-out-2" d="M 620 296 Q 840 250 1072 230" />
+                <path class="route-line route-out route-out-3" d="M 620 304 Q 840 350 1072 370" />
+                <path class="route-line route-out route-out-4" d="M 620 310 Q 840 420 1042 480" />
 
                 <!-- Animated particles -->
                 <circle class="particle particle-1" r="3" />
@@ -87,6 +90,7 @@
                 <circle class="particle particle-4" r="3" />
                 <circle class="particle particle-5" r="3" />
                 <circle class="particle particle-6" r="3" />
+                <circle class="particle particle-7" r="3" />
             </svg>
         </div>
 
@@ -229,15 +233,22 @@
 
                 <!-- Branching arrows -->
                 <div class="score-branch">
-                    <svg class="score-branch-svg" viewBox="0 0 120 160" preserveAspectRatio="none">
-                        <path class="score-branch-line" d="M 0 80 Q 60 80 120 20" />
-                        <path class="score-branch-line" d="M 0 80 L 120 80" />
-                        <path class="score-branch-line" d="M 0 80 Q 60 80 120 140" />
+                    <svg class="score-branch-svg" viewBox="0 0 120 200" preserveAspectRatio="none">
+                        <path class="score-branch-line" d="M 0 100 Q 60 100 120 20" />
+                        <path class="score-branch-line" d="M 0 100 Q 60 100 120 67" />
+                        <path class="score-branch-line" d="M 0 100 Q 60 100 120 133" />
+                        <path class="score-branch-line" d="M 0 100 Q 60 100 120 180" />
                     </svg>
                 </div>
 
                 <!-- Endpoint nodes -->
                 <div class="score-endpoints">
+                    <div class="score-node score-node-endpoint">
+                        <div class="score-node-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                        </div>
+                        <span class="score-node-label">OpenAI</span>
+                    </div>
                     <div class="score-node score-node-endpoint">
                         <div class="score-node-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
@@ -246,15 +257,15 @@
                     </div>
                     <div class="score-node score-node-endpoint">
                         <div class="score-node-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                         </div>
-                        <span class="score-node-label">OpenAI</span>
+                        <span class="score-node-label">vLLM</span>
                     </div>
                     <div class="score-node score-node-endpoint">
                         <div class="score-node-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
                         </div>
-                        <span class="score-node-label">Any Compatible</span>
+                        <span class="score-node-label">Gemini</span>
                     </div>
                 </div>
             </div>
@@ -333,7 +344,7 @@
                 <div class="repertoire-text">
                     <span class="repertoire-label">For AI Engineers</span>
                     <h3>You already know the API</h3>
-                    <p>Conductor speaks OpenAI and Ollama natively. Point your existing SDK at Conductor and gain routing, balancing, and failover &mdash; without changing your application code.</p>
+                    <p>Conductor speaks OpenAI, vLLM, Gemini, and Ollama. Point existing SDKs and clients at Conductor to gain routing, balancing, and failover without rewriting your application architecture.</p>
                 </div>
                 <div class="repertoire-visual">
                     <div class="code-block">
@@ -400,6 +411,8 @@ response = client.chat.completions.create(
                     <h4 class="setlist-category">Routing</h4>
                     <div class="setlist-pills">
                         <span class="pill">OpenAI proxy</span>
+                        <span class="pill">vLLM proxy</span>
+                        <span class="pill">Gemini proxy</span>
                         <span class="pill">Ollama proxy</span>
                         <span class="pill">Streaming</span>
                         <span class="pill">SSE</span>
